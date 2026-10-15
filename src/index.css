@@ -366,13 +366,13 @@ h1 span {
   width: 250px;
 }
 .carousel-3d {
-  height: var(--orbit-height);
+  height: 0;
   left: 50%;
   position: absolute;
   top: 50%;
   transform-style: preserve-3d;
   transition: transform .85s cubic-bezier(.2,.8,.2,1);
-  width: var(--orbit-width);
+  width: 0;
 }
 .carousel-scene:active .carousel-3d { transition: none; }
 .orbit-card {
