@@ -10,6 +10,16 @@ const photos = {
   jewelry: "https://images.unsplash.com/photo-1610992015836-7c249d75782d?auto=format&fit=crop&w=1000&q=85",
 };
 
+const carouselExamples = [
+  { photo: photos.detail, name: "Rosé glow", style: "tons suaves" },
+  { photo: photos.soft, name: "Soft touch", style: "natural" },
+  { photo: photos.pink, name: "Pink mood", style: "rosa intenso" },
+  { photo: photos.jewelry, name: "Pearl detail", style: "detalhes delicados" },
+  { photo: photos.french, name: "French glow", style: "francesinha" },
+  { photo: photos.salon, name: "Studio ritual", style: "cuidado completo" },
+  { photo: photos.hero, name: "Everyday shine", style: "clássico" },
+];
+
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
     <svg
@@ -47,6 +57,10 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const dragStart = useRef<number | null>(null);
   const rotationStart = useRef(0);
+  const rotationStep = 360 / carouselExamples.length;
+  const activeExampleIndex =
+    ((Math.round(-rotation / rotationStep) % carouselExamples.length) + carouselExamples.length) %
+    carouselExamples.length;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -79,6 +93,13 @@ export default function App() {
     event.currentTarget.style.setProperty("--ry", `${x * 9}deg`);
     event.currentTarget.style.setProperty("--mx", `${50 + x * 26}%`);
     event.currentTarget.style.setProperty("--my", `${50 + y * 26}%`);
+  };
+
+  const resetHeroMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.style.setProperty("--rx", "0deg");
+    event.currentTarget.style.setProperty("--ry", "0deg");
+    event.currentTarget.style.setProperty("--mx", "50%");
+    event.currentTarget.style.setProperty("--my", "50%");
   };
 
   const startDrag = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -153,7 +174,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="hero-visual" onPointerMove={handleHeroMove}>
+        <div className="hero-visual" onPointerMove={handleHeroMove} onPointerLeave={resetHeroMove}>
           <div className="aurora" />
           <div className="hero-orbit hero-orbit--one" />
           <div className="hero-orbit hero-orbit--two" />
@@ -193,6 +214,9 @@ export default function App() {
 
         <div
           className="carousel-scene reveal"
+          role="group"
+          aria-roledescription="carrossel 3D"
+          aria-label={`Carrossel 3D com ${carouselExamples.length} referências de nail art`}
           onPointerDown={startDrag}
           onPointerMove={moveDrag}
           onPointerUp={stopDrag}
@@ -203,16 +227,20 @@ export default function App() {
             className="carousel-3d"
             style={{ transform: `rotateX(-8deg) rotateY(${rotation}deg)` }}
           >
-            {[photos.detail, photos.soft, photos.pink, photos.jewelry].map((photo, index) => (
+            {carouselExamples.map((example, index) => (
               <figure
                 className="orbit-card"
-                key={photo}
-                style={{ transform: `rotateY(${index * 90}deg) translateZ(330px)` }}
+                key={example.name}
+                style={{ transform: `rotateY(${index * rotationStep}deg) translateZ(var(--orbit-radius))` }}
               >
-                <img src={photo} alt={`Referência ilustrativa de nail art ${index + 1}`} draggable="false" />
+                <img
+                  src={example.photo}
+                  alt={`${example.name}, referência ilustrativa de nail art em ${example.style}`}
+                  draggable="false"
+                />
                 <figcaption>
-                  <span>Inspiração 0{index + 1}</span>
-                  <small>Referência visual</small>
+                  <span>{example.name}</span>
+                  <small>{example.style}</small>
                 </figcaption>
               </figure>
             ))}
@@ -223,11 +251,13 @@ export default function App() {
         </div>
 
         <div className="carousel-controls">
-          <button type="button" onClick={() => setRotation(rotation + 90)} aria-label="Criação anterior">
+          <button type="button" onClick={() => setRotation(rotation + rotationStep)} aria-label="Criação anterior">
             ←
           </button>
-          <span>vista 360°</span>
-          <button type="button" onClick={() => setRotation(rotation - 90)} aria-label="Próxima criação">
+          <span aria-live="polite">
+            {String(activeExampleIndex + 1).padStart(2, "0")} / {String(carouselExamples.length).padStart(2, "0")}
+          </span>
+          <button type="button" onClick={() => setRotation(rotation - rotationStep)} aria-label="Próxima criação">
             →
           </button>
         </div>
@@ -308,6 +338,18 @@ export default function App() {
           <figure className="gallery-card reveal">
             <img src={photos.french} alt="Referência ilustrativa de unhas francesinhas" />
             <figcaption><span>French glow</span><small>Referência ilustrativa</small></figcaption>
+          </figure>
+          <figure className="gallery-card reveal">
+            <img src={photos.pink} alt="Referência ilustrativa de nail art em rosa vibrante" />
+            <figcaption><span>Pink mood</span><small>Referência ilustrativa</small></figcaption>
+          </figure>
+          <figure className="gallery-card reveal">
+            <img src={photos.jewelry} alt="Referência ilustrativa de unhas com detalhes delicados" />
+            <figcaption><span>Pearl detail</span><small>Referência ilustrativa</small></figcaption>
+          </figure>
+          <figure className="gallery-card reveal">
+            <img src={photos.detail} alt="Referência ilustrativa de manicure em tons rosados" />
+            <figcaption><span>Rosé glow</span><small>Referência ilustrativa</small></figcaption>
           </figure>
         </div>
         <a className="text-link reveal" href="#agendar">
