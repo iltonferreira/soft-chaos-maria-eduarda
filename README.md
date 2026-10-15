@@ -1,6 +1,6 @@
-# Soft Chaos · Maria Eduarda
+# Soft Chaos · Eduarda
 
-Landing page de nail art autoral para Maria Eduarda, inspirada na identidade visual Soft Chaos.
+Landing page de nail art autoral para Eduarda, inspirada na identidade visual Soft Chaos.
 
 ## Desenvolvimento
 

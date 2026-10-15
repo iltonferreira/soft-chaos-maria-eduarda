@@ -123,8 +123,8 @@ export default function App() {
         <span style={{ transform: `scaleX(${scrollProgress})` }} />
       </div>
       <header className="site-header">
-        <a className="brand" href="#inicio" aria-label="Soft Chaos por Maria Eduarda — início">
-          SOFT CHAOS<span>Maria Eduarda · nail artist</span>
+        <a className="brand" href="#inicio" aria-label="Soft Chaos por Eduarda — início">
+          SOFT CHAOS<span>Eduarda · nail artist</span>
         </a>
 
         <nav className={menuOpen ? "nav is-open" : "nav"} aria-label="Navegação principal">
@@ -140,7 +140,7 @@ export default function App() {
         </nav>
 
         <a className="header-cta" href="#agendar">
-          Fale com a Maria
+          Fale com a Eduarda
           <Arrow diagonal />
         </a>
 
@@ -165,7 +165,7 @@ export default function App() {
           </h1>
           <div className="hero-bottom">
             <p>
-              Nail art autoral por Maria Eduarda — feita para combinar com o seu
+              Nail art autoral por Eduarda — feita para combinar com o seu
               jeito, até nos dias meio caóticos.
             </p>
             <a className="circle-link" href="#trabalhos" aria-label="Ver trabalhos">
@@ -274,11 +274,11 @@ export default function App() {
             Um pouco de cor no meio da <em>bagunça.</em>
           </h2>
           <p className="body-copy">
-            Eu sou a Maria Eduarda, designer de unhas. Gosto de criar combinações
+            Eu sou a Eduarda, designer de unhas. Gosto de criar combinações
             com personalidade, misturando delicadeza, cor e aquele detalhe
             inesperado que deixa tudo com a sua cara.
           </p>
-          <div className="signature">Maria Eduarda</div>
+          <div className="signature">Eduarda</div>
         </div>
         <div className="about-art reveal">
           <img src={photos.detail} alt="Nail art em tons de rosa" />
@@ -353,7 +353,7 @@ export default function App() {
           </figure>
         </div>
         <a className="text-link reveal" href="#agendar">
-          Fale com a Maria <Arrow />
+          Fale com a Eduarda <Arrow />
         </a>
       </section>
 
@@ -367,7 +367,7 @@ export default function App() {
             Soft Chaos é beleza sem roteiro: unhas com espaço para cor,
             expressão e um pouco de caos.
           </blockquote>
-          <p>Maria Eduarda · designer de unhas</p>
+          <p>Eduarda · designer de unhas</p>
         </div>
       </section>
 
@@ -381,22 +381,22 @@ export default function App() {
           className="booking-button reveal"
           href="#contato"
         >
-          Quero falar com a Maria <Arrow diagonal />
+          Quero falar com a Eduarda <Arrow diagonal />
         </a>
       </section>
 
       <footer>
         <a className="brand brand--footer" href="#inicio">
-          SOFT CHAOS<span>Maria Eduarda · nail artist</span>
+          SOFT CHAOS<span>Eduarda · nail artist</span>
         </a>
         <div id="contato">
           <p>Designer de unhas</p>
-          <p>Maria Eduarda</p>
+          <p>Eduarda</p>
         </div>
         <div className="footer-links">
           <a href="#inicio">Voltar ao início</a>
         </div>
-        <p className="copyright">© 2026 Soft Chaos · Maria Eduarda</p>
+        <p className="copyright">© 2026 Soft Chaos · Eduarda</p>
       </footer>
     </main>
   );
